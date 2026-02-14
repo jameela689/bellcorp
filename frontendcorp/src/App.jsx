@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {Routes,Route} from 'react-router-dom'; 
+import {Routes,Route,Navigate} from 'react-router-dom'; 
 // import './App.css'
 import Signup from './Components/Signup/Signup';
 import Login from './Components/Login/Login';
@@ -16,10 +16,11 @@ function App() {
     <div className='app'>
     <Navbar/>
     <Routes>
-
+    <Route path="/" element={<Navigate to="/events" replace/>}/>
       <Route path="/signup" element={<Signup/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/events" element={<EventsPage/>}/>
+      
       <Route path="/events/:id" element={<EventDetailPage/>}/>
       <Route path="/dashboard" element={
         <ProtectedRoute>
