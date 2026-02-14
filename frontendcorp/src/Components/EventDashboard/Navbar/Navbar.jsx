@@ -80,8 +80,8 @@ const Navbar = () => {
       <div className="navbar-container">
         {/* Logo */}
         <div className="navbar-logo" onClick={() => handleNavigation('/events')}>
-          <span className="logo-icon">🎫</span>
-          <span className="logo-text">EventHub</span>
+          <span className="logo-icon"></span>
+          <span className="logo-text">&#128578;EventHub</span>
         </div>
 
         {/* Mobile Menu Toggle */}
