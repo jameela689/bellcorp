@@ -1,0 +1,122 @@
+/* ==================== EVENTS PAGE ==================== */
+.events-page {
+    min-height: calc(100vh - 73px);
+    background: #f7fafc;
+    padding: 32px 0;
+  }
+  
+  .events-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  /* ==================== HEADER ==================== */
+  .events-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  
+  .page-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #2d3748;
+    margin: 0 0 8px 0;
+  }
+  
+  .page-subtitle {
+    font-size: 16px;
+    color: #718096;
+    margin: 0;
+  }
+  
+  /* ==================== SEARCH SECTION ==================== */
+  .search-section {
+    margin-bottom: 32px;
+  }
+  
+  /* ==================== CONTENT LAYOUT ==================== */
+  .events-content {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  
+  /* ==================== SIDEBAR ==================== */
+  .events-sidebar {
+    position: sticky;
+    top: 90px;
+  }
+  
+  /* ==================== MAIN AREA ==================== */
+  .events-main {
+    min-height: 400px;
+  }
+  
+  .results-header {
+    margin-bottom: 24px;
+  }
+  
+  .results-count {
+    font-size: 20px;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0;
+  }
+  
+  /* ==================== RESPONSIVE ==================== */
+  @media (max-width: 968px) {
+    .events-content {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  
+    .events-sidebar {
+      position: static;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .events-page {
+      padding: 24px 0;
+    }
+  
+    .events-container {
+      padding: 0 16px;
+    }
+  
+    .events-header {
+      margin-bottom: 24px;
+    }
+  
+    .page-title {
+      font-size: 28px;
+    }
+  
+    .page-subtitle {
+      font-size: 14px;
+    }
+  
+    .search-section {
+      margin-bottom: 24px;
+    }
+  
+    .events-content {
+      gap: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .events-page {
+      padding: 20px 0;
+    }
+  
+    .page-title {
+      font-size: 24px;
+    }
+  
+    .results-count {
+      font-size: 18px;
+    }
+  }

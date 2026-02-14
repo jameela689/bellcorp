@@ -1,0 +1,121 @@
+/* ==================== FILTER PANEL ==================== */
+.filter-panel {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+  }
+  
+  /* ==================== HEADER ==================== */
+  .filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .filter-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .active-count {
+    font-size: 14px;
+    color: #667eea;
+    font-weight: 500;
+  }
+  
+  .clear-filters-btn {
+    background: transparent;
+    border: none;
+    color: #667eea;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+  
+  .clear-filters-btn:hover {
+    background: #edf2f7;
+    color: #764ba2;
+  }
+  
+  /* ==================== FILTER GROUPS ==================== */
+  .filter-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .filter-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #2d3748;
+  }
+  
+  /* ==================== SELECT & INPUT ==================== */
+  .filter-select,
+  .filter-input {
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    background: white;
+    color: #2d3748;
+  }
+  
+  .filter-select:focus,
+  .filter-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+  
+  .filter-select {
+    cursor: pointer;
+  }
+  
+  /* ==================== RESPONSIVE ==================== */
+  @media (max-width: 768px) {
+    .filter-panel {
+      padding: 16px;
+    }
+  
+    .filter-title {
+      font-size: 16px;
+    }
+  
+    .filter-groups {
+      gap: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .filter-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  
+    .clear-filters-btn {
+      align-self: flex-end;
+    }
+  }

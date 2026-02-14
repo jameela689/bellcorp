@@ -133,6 +133,7 @@ dbInitAndConnect();
  */
 const authenticateToken = (request, response, next) => {
     try {
+        console.log("request = ",request,request.headers)
         const authHeader = request.headers['authorization'];
         
         if (!authHeader) {
@@ -143,7 +144,7 @@ const authenticateToken = (request, response, next) => {
         }
 
         const token = authHeader.split(' ')[1]; // Extract Bearer token
-        
+        console.log("token======")
         if (!token) {
             return response.status(401).json({ 
                 success: false,
@@ -160,7 +161,7 @@ const authenticateToken = (request, response, next) => {
                     error: 'Invalid or expired token' 
                 });
             }
-
+            console.log("after jwt verify in backend")
             // Verify session exists in database
             const session = await db.get(
                 `SELECT * FROM user_sessions WHERE user_id = ? AND token = ?`,
@@ -271,6 +272,7 @@ app.post('/api/auth/signup', async (request, response) => {
             token,
             user
         });
+        console.log("user registered successfulyy")
 
     } catch (error) {
         console.error('Signup error:', error);
@@ -333,7 +335,7 @@ app.post('/api/auth/login', async (request, response) => {
             `INSERT INTO user_sessions (user_id, token) VALUES (?, ?)`,
             [user.id, token]
         );
-
+            console.log("insid elogin  why server is weird here ")
         response.json({
             success: true,
             message: 'Login successful',
@@ -731,6 +733,7 @@ app.get('/api/registrations/my-events', authenticateToken, async (request, respo
     try {
         const { userId } = request.user;
         const currentDate = new Date().toISOString();
+        console.log("inside my events ========")
 
         // Get all active registrations with event details
         const registrations = await db.all(

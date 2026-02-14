@@ -1,0 +1,155 @@
+/* ==================== EVENT CARD ==================== */
+.event-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-color: #667eea;
+  }
+  
+  /* ==================== HEADER ==================== */
+  .event-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .event-card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0;
+    line-height: 1.4;
+    flex: 1;
+  }
+  
+  /* ==================== AVAILABILITY BADGE ==================== */
+  .availability-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  
+  .availability-badge.available {
+    background: #c6f6d5;
+    color: #22543d;
+  }
+  
+  .availability-badge.limited {
+    background: #feebc8;
+    color: #7c2d12;
+  }
+  
+  .availability-badge.full {
+    background: #fed7d7;
+    color: #742a2a;
+  }
+  
+  /* ==================== BODY ==================== */
+  .event-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  
+  .event-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .info-icon {
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  
+  .info-text {
+    font-size: 14px;
+    color: #4a5568;
+    line-height: 1.5;
+  }
+  
+  /* ==================== CATEGORY ==================== */
+  .event-category {
+    margin-top: 8px;
+  }
+  
+  .category-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: #edf2f7;
+    color: #4a5568;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  /* ==================== FOOTER ==================== */
+  .event-card-footer {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid #e2e8f0;
+  }
+  
+  .capacity-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .capacity-bar {
+    width: 100%;
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .capacity-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 10px;
+    transition: width 0.3s ease;
+  }
+  
+  .capacity-text {
+    font-size: 12px;
+    color: #718096;
+    text-align: right;
+  }
+  
+  /* ==================== RESPONSIVE ==================== */
+  @media (max-width: 480px) {
+    .event-card {
+      padding: 16px;
+    }
+  
+    .event-card-title {
+      font-size: 16px;
+    }
+  
+    .availability-badge {
+      font-size: 11px;
+      padding: 3px 10px;
+    }
+  
+    .info-text {
+      font-size: 13px;
+    }
+  }

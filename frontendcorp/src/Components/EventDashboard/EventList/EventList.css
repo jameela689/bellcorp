@@ -1,0 +1,98 @@
+/* ==================== EVENT LIST ==================== */
+.event-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    animation: fadeIn 0.4s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* ==================== STATE VIEWS ==================== */
+  .event-list-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    min-height: 300px;
+  }
+  
+  .event-list-state.error {
+    color: #f56565;
+  }
+  
+  .state-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  
+  .state-message {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 0 0 8px 0;
+  }
+  
+  .state-submessage {
+    font-size: 14px;
+    color: #718096;
+    margin: 0;
+  }
+  
+  /* ==================== LOADING SPINNER ==================== */
+  .loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #e2e8f0;
+    border-top-color: #667eea;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 16px;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* ==================== RESPONSIVE ==================== */
+  @media (max-width: 768px) {
+    .event-list {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .event-list {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  
+    .event-list-state {
+      padding: 40px 20px;
+      min-height: 250px;
+    }
+  
+    .state-icon {
+      font-size: 40px;
+    }
+  
+    .state-message {
+      font-size: 16px;
+    }
+  
+    .state-submessage {
+      font-size: 13px;
+    }
+  }
