@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import './Signup.css';
 
 const Signup = () => {
@@ -241,7 +241,7 @@ const Signup = () => {
           <div className="form-footer">
             <p>
               Already have an account? {' '}
-              <a href="/login">Log in here</a>
+              <Link to="/login">Log in here</Link>
             </p>
           </div>
         </form>
