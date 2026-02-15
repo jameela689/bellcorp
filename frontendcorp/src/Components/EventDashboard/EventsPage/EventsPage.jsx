@@ -1,4 +1,4 @@
-import { useState, useEffect,useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import FilterPanel from '../FilterPanel/FilterPanel';
 import EventList from '../EventList/EventList';
@@ -13,7 +13,7 @@ import axios from 'axios';
  * - Main page for browsing all events
  * - Coordinate search, filter, and event list
  * - Fetch events from API with query parameters
- * - Handle pagination (optional)
+ * - Handle pagination (✨ NEW)
  * - Maintain filter state across navigation
  * 
  * State Management:
@@ -22,6 +22,8 @@ import axios from 'axios';
  * - error: String error message
  * - searchQuery: Text search string
  * - filters: Object with category, location, dateFrom, dateTo
+ * - currentPage: Current page number (✨ NEW)
+ * - pagination: Pagination metadata from backend (✨ NEW)
  */
 const EventsPage = () => {
   const [events, setEvents] = useState([]);
@@ -33,6 +35,14 @@ const EventsPage = () => {
     location: '',
     dateFrom: '',
     dateTo: ''
+  });
+
+  // ✨ NEW: Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pagination, setPagination] = useState({
+    totalPages: 0,
+    totalEvents: 0,
+    limit: 10
   });
 
   // Use useCallback to memoize fetchEvents and prevent infinite loops
@@ -48,8 +58,8 @@ const EventsPage = () => {
         location: filters.location,
         dateFrom: filters.dateFrom,
         dateTo: filters.dateTo,
-        page: 1,
-        limit: 50
+        page: currentPage,  // ✨ CHANGED: Use dynamic page
+        limit: 10           // ✨ CHANGED: Match backend default
       };
 
       // Remove empty params
@@ -57,19 +67,20 @@ const EventsPage = () => {
         if (!params[key]) delete params[key];
       });
 
-      console.log('Fetching events with params:', params); // Debug log
+      console.log('Fetching events with params:', params);
 
-      // const response = await eventAPI.getAll(params);
-      const token = Cookies.get('token')
-      const response = await axios.get('https://bellcorp.onrender.com/api/events',{ params },{
-        headers:{
-          Authorization:`Bearer ${token}`
+      const token = Cookies.get('token');
+      const response = await axios.get('https://bellcorp.onrender.com/api/events', { params }, {
+        headers: {
+          Authorization: `Bearer ${token}`
         }
       });
 
       if (response.data.success) {
         setEvents(response.data.data.events);
-        console.log('Events fetched:', response.data.data.events.length); // Debug log
+        setPagination(response.data.data.pagination); // ✨ NEW: Store pagination metadata
+        console.log('Events fetched:', response.data.data.events.length);
+        console.log('Pagination:', response.data.data.pagination); // ✨ NEW: Debug log
       } else {
         setError('Failed to fetch events');
       }
@@ -79,23 +90,25 @@ const EventsPage = () => {
     } finally {
       setLoading(false);
     }
-  }, [searchQuery, filters.category, filters.location, filters.dateFrom, filters.dateTo]);
+  }, [searchQuery, filters.category, filters.location, filters.dateFrom, filters.dateTo, currentPage]); // ✨ CHANGED: Added currentPage
 
   // Fetch events whenever search or filters change
   useEffect(() => {
     fetchEvents();
   }, [fetchEvents]);
 
-  // Use useCallback to prevent SearchBar from re-rendering unnecessarily
-  const handleSearch = useCallback((query) => {
-    console.log('Search query changed:', query); // Debug log
+  // ✨ CHANGED: Renamed and added page reset
+  const handleSearchWithReset = useCallback((query) => {
+    console.log('Search query changed:', query);
     setSearchQuery(query);
+    setCurrentPage(1); // ✨ NEW: Reset to page 1 on search
   }, []);
 
-  // Use useCallback to prevent FilterPanel from re-rendering unnecessarily
+  // ✨ CHANGED: Added page reset on filter change
   const handleFilterChange = useCallback((newFilters) => {
-    console.log('Filters changed:', newFilters); // Debug log
+    console.log('Filters changed:', newFilters);
     setFilters(newFilters);
+    setCurrentPage(1); // ✨ NEW: Reset to page 1 on filter change
   }, []);
 
   return (
@@ -112,7 +125,7 @@ const EventsPage = () => {
         {/* Search Bar */}
         <div className="search-section">
           <SearchBar 
-            onSearch={handleSearch}
+            onSearch={handleSearchWithReset}  
             placeholder="Search events by name or description..."
           />
         </div>
@@ -130,7 +143,8 @@ const EventsPage = () => {
               <h2 className="results-count">
                 {!loading && !error && (
                   <>
-                    {events.length} {events.length === 1 ? 'Event' : 'Events'} Found
+                    {pagination.totalEvents} {pagination.totalEvents === 1 ? 'Event' : 'Events'} Found
+                    {/* ✨ CHANGED: Show total from pagination metadata */}
                   </>
                 )}
               </h2>
@@ -141,6 +155,34 @@ const EventsPage = () => {
               loading={loading}
               error={error}
             />
+
+            {/* ✨ NEW: Pagination Controls */}
+            {!loading && !error && pagination.totalPages > 1 && (
+              <div className="pagination">
+                <button 
+                  className="pagination-btn"
+                  onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                  disabled={currentPage === 1}
+                >
+                  ← Previous
+                </button>
+                
+                <span className="pagination-info">
+                  Page {currentPage} of {pagination.totalPages}
+                  <span className="total-events">
+                    ({pagination.totalEvents} total)
+                  </span>
+                </span>
+                
+                <button 
+                  className="pagination-btn"
+                  onClick={() => setCurrentPage(prev => Math.min(pagination.totalPages, prev + 1))}
+                  disabled={currentPage === pagination.totalPages}
+                >
+                  Next →
+                </button>
+              </div>
+            )}
           </main>
         </div>
       </div>
