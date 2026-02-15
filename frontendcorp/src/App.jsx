@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import {Routes,Route,Navigate} from 'react-router-dom'; 
-// import './App.css'
 import Signup from './Components/Signup/Signup';
 import Login from './Components/Login/Login';
 import {ProtectedRoute} from './Components/ProtectedRoute/ProtectedRoute'

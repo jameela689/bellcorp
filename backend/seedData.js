@@ -4,7 +4,7 @@ const seedEvents = async (db) => {
     try {
         console.log('🌱 Starting database seeding...');
 
-        // Check if events already exist
+        
         const existingEvents = await db.get('SELECT COUNT(*) as count FROM events');
         
         if (existingEvents.count > 0) {
@@ -12,9 +12,9 @@ const seedEvents = async (db) => {
             return { success: true, message: 'Events already seeded', count: existingEvents.count };
         }
 
-        // Sample events with diverse categories and locations
+        
         const events = [
-            // Tech & Innovation Events
+            
             {
                 name: 'AI & Machine Learning Summit 2026',
                 organizer: 'Tech Innovators Inc',
@@ -49,7 +49,7 @@ const seedEvents = async (db) => {
                 tags: JSON.stringify(['Cybersecurity', 'Privacy', 'Enterprise', 'Security'])
             },
 
-            // Business & Networking Events
+
             {
                 name: 'Startup Pitch Night',
                 organizer: 'Venture Connect',
@@ -84,7 +84,7 @@ const seedEvents = async (db) => {
                 tags: JSON.stringify(['Marketing', 'SEO', 'Social Media', 'Business'])
             },
 
-            // Arts & Culture Events
+
             {
                 name: 'Jazz Under the Stars',
                 organizer: 'City Arts Foundation',
@@ -119,7 +119,7 @@ const seedEvents = async (db) => {
                 tags: JSON.stringify(['Photography', 'Outdoors', 'Creative', 'Nature'])
             },
 
-            // Health & Wellness Events
+
             {
                 name: 'Yoga & Meditation Retreat',
                 organizer: 'Peaceful Mind Wellness',
@@ -143,7 +143,7 @@ const seedEvents = async (db) => {
                 tags: JSON.stringify(['Running', 'Marathon', 'Fitness', 'Training'])
             },
 
-            // Educational Events
+
             {
                 name: 'Science Fair for Young Innovators',
                 organizer: 'STEM Education Foundation',
@@ -167,7 +167,7 @@ const seedEvents = async (db) => {
                 tags: JSON.stringify(['Writing', 'Creative', 'Literature', 'Publishing'])
             },
 
-            // Food & Beverage Events
+
             {
                 name: 'Craft Beer Festival',
                 organizer: 'Brewmasters Alliance',
@@ -191,7 +191,7 @@ const seedEvents = async (db) => {
                 tags: JSON.stringify(['Cooking', 'Food', 'Culinary', 'Sustainable'])
             },
 
-            // Past Events (for testing dashboard history)
+
             {
                 name: 'New Year Tech Expo 2026',
                 organizer: 'Innovation Hub',
@@ -215,7 +215,7 @@ const seedEvents = async (db) => {
                 tags: JSON.stringify(['Music', 'Festival', 'EDM', 'Hip-Hop'])
             },
 
-            // Upcoming Events with Limited Seats
+
             {
                 name: 'Blockchain & Crypto Summit',
                 organizer: 'Decentralize Network',
@@ -251,7 +251,7 @@ const seedEvents = async (db) => {
             }
         ];
 
-        // Insert events into database
+
         const insertPromises = events.map(event => {
             return db.run(
                 `INSERT INTO events (name, organizer, location, date, description, capacity, available_seats, category, tags)
